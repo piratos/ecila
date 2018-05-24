@@ -1,0 +1,194 @@
+{
+  "rasa_nlu_data": {
+    "common_examples": [
+      {
+        "text": "hello",
+        "intent": "greet",
+        "entities": []
+      },
+      {
+        "text": "good bye",
+        "intent": "goodbye",
+        "entities": []
+      },
+      {
+        "text": "what is the weather in Paris tomorrow",
+        "intent": "inform_weather",
+        "entities": [
+          {
+            "start": 23,
+            "end": 28,
+            "value": "Paris",
+            "entity": "location"
+          },
+          {
+            "start": 29,
+            "end": 37,
+            "value": "tomorrow",
+            "entity": "date"
+          }
+        ]
+      },
+      {
+        "text": "how is the weather today in Paris",
+        "intent": "inform_weather",
+        "entities": [
+          {
+            "start": 19,
+            "end": 25,
+            "value": "today ",
+            "entity": "date"
+          },
+          {
+            "start": 28,
+            "end": 33,
+            "value": "Paris",
+            "entity": "location"
+          }
+        ]
+      },
+      {
+        "text": "what is the weather in Paris",
+        "intent": "inform_weather",
+        "entities": [
+          {
+            "start": 23,
+            "end": 28,
+            "value": "Paris",
+            "entity": "location"
+          }
+        ]
+      },
+      {
+        "text": "weather tomorrow",
+        "intent": "inform_weather",
+        "entities": [
+          {
+            "start": 8,
+            "end": 16,
+            "value": "tomorrow",
+            "entity": "date"
+          }
+        ]
+      },
+      {
+        "text": "hi",
+        "intent": "greet",
+        "entities": []
+      },
+      {
+        "text": "yo",
+        "intent": "greet",
+        "entities": []
+      },
+      {
+        "text": "morning",
+        "intent": "greet",
+        "entities": []
+      },
+      {
+        "text": "hey",
+        "intent": "greet",
+        "entities": []
+      },
+      {
+        "text": "bye",
+        "intent": "goodbye",
+        "entities": []
+      },
+      {
+        "text": "byebye",
+        "intent": "goodbye",
+        "entities": []
+      },
+      {
+        "text": "bye bye",
+        "intent": "goodbye",
+        "entities": []
+      },
+      {
+        "text": "see you",
+        "intent": "goodbye",
+        "entities": []
+      },
+      {
+        "text": "I wonder how is it in London today",
+        "intent": "inform_weather",
+        "entities": [
+          {
+            "start": 22,
+            "end": 28,
+            "value": "London",
+            "entity": "location"
+          },
+          {
+            "start": 29,
+            "end": 34,
+            "value": "today",
+            "entity": "date"
+          }
+        ]
+      },
+      {
+        "text": "is it cloudy in Paris",
+        "intent": "inform_weather",
+        "entities": [
+          {
+            "start": 16,
+            "end": 21,
+            "value": "Paris",
+            "entity": "location"
+          }
+        ]
+      },
+      {
+        "text": "is the weather good in Tunis",
+        "intent": "inform_weather",
+        "entities": [
+          {
+            "start": 23,
+            "end": 28,
+            "value": "Tunis",
+            "entity": "location"
+          }
+        ]
+      },
+      {
+        "text": "how is the weather today",
+        "intent": "inform_weather",
+        "entities": [
+          {
+            "start": 19,
+            "end": 24,
+            "value": "today",
+            "entity": "date"
+          }
+        ]
+      },
+      {
+        "text": "how is the weather in Budapest",
+        "intent": "inform_weather",
+        "entities": [
+          {
+            "start": 22,
+            "end": 30,
+            "value": "Budapest",
+            "entity": "location"
+          }
+        ]
+      },
+      {
+        "text": "what is the weather near Paris",
+        "intent": "inform_weather",
+        "entities": [
+          {
+            "start": 25,
+            "end": 30,
+            "value": "Paris",
+            "entity": "location"
+          }
+        ]
+      }
+    ]
+  }
+}
