@@ -1,0 +1,4 @@
+*.pyc
+main/modules
+main/node_modules
+
