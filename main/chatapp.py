@@ -1,17 +1,34 @@
-from flask import Flask
+from flask import Flask, jsonify
+from functools import wraps
+from nlu_model import run_nlu
+
 import json
 import requests
 
-from nlu_model import run_nlu
-
 app = Flask(__name__)
 
+
+def support_jsonp(f):
+    """Wraps JSONified output for JSONP"""
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        callback = 'showmsg'
+        if callback:
+            content = str(callback) + '(' + f(kwargs['query']).data.decode('utf-8') + ')'
+            return app.response_class(content, mimetype='application/json')
+        else:
+            return f(*args, **kwargs)
+    return decorated_function
+
+
 @app.route('/a/<query>')
+@support_jsonp
 def respond(query):
 	print(query)
-	nlu_res = run_nlu(query)
+	nlu_res = run_nlu(query, config='mitie')
 	intent = nlu_res.get('intent').get('name')
 	intent_confidence = nlu_res.get('intent').get('confidence')
+	msg = None
 	if intent == 'inform_weather':
 		weather_date = None
 		weather_location = None
@@ -24,12 +41,14 @@ def respond(query):
 		if weather_location:
 			res = requests.get('http://127.0.0.1:5001/loc/%s' % weather_location).text
 			full_answer = 'it will be %s in %s %s' %(res, weather_location, weather_date)
-			return full_answer
+			msg = full_answer
 	elif intent == 'greet':
-		return 'Hi how are you?'
+		msg = 'Hi how are you?'
 	elif intent == 'goodbye':
-		return 'see ya'
-	return 'I am so dump jesus !'
+		msg = 'see ya'
+	else:
+		msg = 'I am so dump jesus !'
+	return jsonify(msg=msg)
 
 if __name__ == '__main__':
 	app.run(host='0.0.0.0', port=5000)
