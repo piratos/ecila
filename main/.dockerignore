@@ -1,0 +1,3 @@
+node-modules
+__pycache__
+data/mitie/total_word_feature_extractor.dat

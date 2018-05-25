@@ -1,0 +1,27 @@
+slots:
+  location:
+    type: text
+
+  date:
+    type: text
+
+intents:
+  - greed
+  - goodbye
+  - weather_inform
+
+
+entities:
+  - location
+  - date
+
+templates:
+  utter_greed:
+    - 'Hello, how are you?'
+    - 'Yo wassup'
+  utter_goodbye:
+    - 'See ya.'
+    - 'Will never miss you :)'
+  utter_ask_location:
+    - 'emm where?'
+actions:

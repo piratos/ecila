@@ -39,7 +39,7 @@ def respond(query):
 				weather_location = entity.get('value')
 		# get the response
 		if weather_location:
-			res = requests.get('http://127.0.0.1:5001/loc/%s' % weather_location).text
+			res = requests.get('http://weather:5001/loc/%s' % weather_location).text
 			full_answer = 'it will be %s in %s %s' %(res, weather_location, weather_date)
 			msg = full_answer
 	elif intent == 'greet':
