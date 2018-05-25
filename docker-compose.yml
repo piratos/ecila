@@ -1,0 +1,40 @@
+version: "3"
+services:
+    web:
+        image: web_app:latest
+        volumes:
+            - ./web:/app
+        deploy:
+            replicas: 1
+            restart_policy:
+                condition: on-failure
+        ports:
+            - "5007:5007"
+        networks:
+            - net0
+    weather:
+        image: weather_app:latest
+        volumes:
+            - ./weather:/app
+        deploy:
+            replicas: 1
+            restart_policy:
+                condition: "on-failure"
+        ports:
+            - "5001:5001"
+        networks:
+            - net0
+    main:
+        image: main_app:latest
+        volumes:
+            - ./main:/app
+        deploy:
+            replicas: 1
+            restart_policy:
+                condition: "on-failure"
+        ports:
+            - "5000:5000"
+        networks:
+            - net0
+networks:
+    net0:
