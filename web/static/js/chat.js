@@ -28,7 +28,7 @@ $(function() {
                        crossDomain: true,
                        dataType: 'jsonp',
                        jsonp: false,
-                       url: 'http://192.168.187.128:5000/a/'+message_val,
+                       url: 'http://main:5000/a/'+message_val,
                        success: function(data){
                             showmsg(data['msg']);
                        }
