@@ -1,4 +1,5 @@
 *.pyc
-main/modules
+main/models
 main/node_modules
+main/data/mitie
 
