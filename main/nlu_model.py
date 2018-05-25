@@ -18,18 +18,24 @@ def train_nlu(data, config, model_dir):
 
 # run the trained model
 # query: message we want the model to respond to it
-def run_nlu(query):
-	interpreter = Interpreter.load('models/nlu/default/proto1', RasaNLUConfig('config_spacy.json'))
+def run_nlu(query, config='spacy'):
+	interpreter = Interpreter.load('models/nlu/default/proto1', RasaNLUConfig('config_%s.json' % config))
 	return interpreter.parse(query)
 
 
 def main():
+	config = 'spacy'
+	if len(sys.argv) == 3:
+		if sys.argv[2] == 'spacy':
+			config = 'spacy'
+		elif sys.argv[2] == 'mitie':
+			config = 'mitie'
 	if len(sys.argv) < 2:
 		print('run with options "run" or "train" ')
 	elif sys.argv[1] == 'train':
-		train_nlu('data/data.json', 'config_spacy.json', 'models/nlu')
+		train_nlu('data/data.json', 'config_%s.json' % config, 'models/nlu')
 	elif sys.argv[1] == 'run':
-		print(run_nlu('I wonder how is the weather in barcelona tomorrow'))
+		print(run_nlu('I wonder how is it in barcelona tomorrow', config=config))
 	else:
 		print('run with options "run" or "train" ')
 

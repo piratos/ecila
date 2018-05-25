@@ -1,0 +1,7 @@
+{
+	"pipeline": "mitie",
+	"mitie_file": "data/mitie/total_word_feature_extractor.dat",
+	"path": "models/mitie/nlu",
+	"data": "data/data.json",
+	"num_threads": 100
+}
