@@ -3,3 +3,4 @@ main/models
 main/node_modules
 main/data/mitie
 web/static/assets/sass
+data.env
