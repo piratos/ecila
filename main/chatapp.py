@@ -4,8 +4,12 @@ from nlu_model import run_nlu
 
 import json
 import requests
+import os
+
 
 app = Flask(__name__)
+WEATHER_PORT = int(os.environ.get('WEATHER_PORT', '5000'))
+MAIN_PORT = int(os.environ.get('MAIN_PORT', 5000))
 
 
 def support_jsonp(f):
@@ -39,7 +43,7 @@ def respond(query):
 				weather_location = entity.get('value')
 		# get the response
 		if weather_location:
-			res = requests.get('http://weather:5001/loc/%s' % weather_location).text
+			res = requests.get('http://weather:%d/loc/%s' % (WEATHER_PORT, weather_location)).text
 			full_answer = 'it will be %s in %s %s' %(res, weather_location, weather_date)
 			msg = full_answer
 	elif intent == 'greet':
@@ -51,4 +55,4 @@ def respond(query):
 	return jsonify(msg=msg)
 
 if __name__ == '__main__':
-	app.run(host='0.0.0.0', port=5000)
+	app.run(host='0.0.0.0', port=MAIN_PORT)

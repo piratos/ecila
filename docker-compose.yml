@@ -2,6 +2,8 @@ version: "3"
 services:
     web:
         image: web_app:latest
+        env_file:
+            - data.env
         volumes:
             - ./web:/app
         deploy:
@@ -14,6 +16,8 @@ services:
             - net0
     weather:
         image: weather_app:latest
+        env_file:
+            - data.env
         volumes:
             - ./weather:/app
         deploy:
@@ -26,6 +30,8 @@ services:
             - net0
     main:
         image: main_app:latest
+        env_file:
+            - data.env
         volumes:
             - ./main:/app
         deploy:
