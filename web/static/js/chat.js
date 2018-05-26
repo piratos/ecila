@@ -28,7 +28,7 @@ $(function() {
                        crossDomain: true,
                        dataType: 'jsonp',
                        jsonp: false,
-                       url: 'http://main:5000/a/'+message_val,
+                       url: 'http://'+appConfig.host_ip+':'+appConfig.main_port+'/a/'+message_val,
                        success: function(data){
                             showmsg(data['msg']);
                        }
