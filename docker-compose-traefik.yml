@@ -1,0 +1,67 @@
+version: "3"
+
+networks:
+    net0:
+
+services:
+    traefik:
+        image: traefik
+        command: --api --docker
+        ports:
+          - "80:80"
+          - "8080:8080"
+          - "443:443"
+        volumes:
+          - /var/run/docker.sock:/var/run/docker.sock
+          - ./traefik/traefik.toml:/traefik.toml
+          - ./traefik/acme.json:/acme.json
+        networks:
+          - net0
+    web:
+        image: web_app:latest
+        env_file:
+          - data.env
+        volumes:
+          - ./web:/app
+        labels:
+          - "traefik.frontend.rule=Host:web.karrita.com"
+          - "traefik.port=80"
+          - "traefik.enabled=true"
+        deploy:
+            replicas: 1
+            restart_policy:
+                condition: on-failure
+        networks:
+          - net0
+    weather:
+        image: weather_app:latest
+        env_file:
+          - data.env
+        volumes:
+          - ./weather:/app
+        labels:
+          - "traefik.frontend.rule=Host:weather.karrita.com"
+          - "traefik.port=80"
+          - "traefik.enabled=true"
+        deploy:
+            replicas: 1
+            restart_policy:
+                condition: "on-failure"
+        networks:
+          - net0
+    main:
+        image: main_app:latest
+        env_file:
+          - data.env
+        volumes:
+          - ./main:/app
+        labels:
+          - "traefik.frontend.rule=Host:ai.karrita.com"
+          - "traefik.port=80"
+          - "traefik.enabled=true"
+        deploy:
+            replicas: 1
+            restart_policy:
+                condition: "on-failure"
+        networks:
+          - net0
