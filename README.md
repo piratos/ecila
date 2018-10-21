@@ -17,6 +17,8 @@ Steps to run the application
 - Start the docker stack `docker stack deploy --compose-file docker-compose.yml ecila` ecila is the name of the stack
 - Make sure all services are up `docker service ls`
 - visit the web.domain.com and test the bot
+## Warning
+This is an 8 hours project dont expect the finest project it is a POC, will rewrite and refactor it every once and while
 ## Note
 This is very experimental project and it ll get updates every now and then.
 I am using traefik to handle the routing between the microservices, as first usage I am using subdomains to serve frontends and thus, you ll need a FQDN which is wildcarded to the server ip so traefik will be able to read the subdomains. You can also use one subdomain and route throught pots but you will need to reconfigure traefik on your own.

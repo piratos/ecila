@@ -30,31 +30,34 @@ def support_jsonp(f):
 @app.route('/a/<query>')
 @support_jsonp
 def respond(query):
-	print(query)
-	nlu_res = run_nlu(query, config='mitie')
-	intent = nlu_res.get('intent').get('name')
-	intent_confidence = nlu_res.get('intent').get('confidence')
-	msg = None
-	if intent == 'inform_weather':
-		weather_date = None
-		weather_location = None
-		for entity in nlu_res.get('entities', []):
-			if entity.get('entity') == 'date':
-				weather_date = entity.get('value')
-			elif entity.get('entity') == 'location':
-				weather_location = entity.get('value')
-		# get the response
-		if weather_location:
-			res = requests.get('http://%s:%d/loc/%s' % (WEATHER_EP, WEATHER_PORT, weather_location)).text
-			full_answer = 'it will be %s in %s %s' %(res, weather_location, weather_date)
-			msg = full_answer
-	elif intent == 'greet':
-		msg = 'Hi how are you?'
-	elif intent == 'goodbye':
-		msg = 'see ya'
-	else:
-		msg = 'I am so dump jesus !'
-	return jsonify(msg=msg)
+    print(query)
+    nlu_res = run_nlu(query, config='mitie')
+    intent = nlu_res.get('intent').get('name')
+    intent_confidence = nlu_res.get('intent').get('confidence')
+    msg = None
+    if intent == 'inform_weather':
+        weather_date = None
+        weather_location = None
+        for entity in nlu_res.get('entities', []):
+            if entity.get('entity') == 'date':
+                weather_date = entity.get('value')
+            elif entity.get('entity') == 'location':
+                weather_location = entity.get('value')
+        # get the response
+        if weather_location:
+            res = requests.get('http://%s:%d/loc/%s' % (WEATHER_EP, WEATHER_PORT, weather_location)).text
+            if res != 'FAIL':
+                full_answer = 'it will be %s in %s %s' %(res, weather_location, weather_date)
+                msg = full_answer
+            else:
+                msg = 'Cannot query the weather at this location or time'
+    elif intent == 'greet':
+        msg = 'Hi how are you?'
+    elif intent == 'goodbye':
+        msg = 'see ya'
+    if not msg:
+        msg = 'I am so dump jesus !'
+    return jsonify(msg=msg)
 
 if __name__ == '__main__':
-	app.run(host='0.0.0.0', port=MAIN_PORT)
+    app.run(host='0.0.0.0', port=MAIN_PORT)

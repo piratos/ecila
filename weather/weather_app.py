@@ -12,6 +12,8 @@ WEATHER_EP = os.environ.get('WEATHER_EP', '0.0.0.0')
 @app.route('/loc/<location>')
 def get_weather_by_location(location):
     lookup = weather.lookup_by_location(location)
+    if not lookup:
+        return 'FAIL'
     result = dict()
     condition = lookup.condition
     return condition.text
