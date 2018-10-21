@@ -3,6 +3,7 @@ Virtual assistant built with RASA IA as dockerized microservices
 
 ## How to run this ?
 there is a docker compose file version 3 that works with docker swarm
+EDIT: Traefik support added, you can still use the old docker compose for development purposes
 
 Steps to generate the data:
 - Navigate to main/data and download [mitie models](https://github.com/mit-nlp/MITIE/releases/download/v0.4/MITIE-models-v0.2.tar.bz2)
@@ -15,10 +16,14 @@ Steps to run the application
 - Initialize the docker swarm `docker swarm init`
 - Start the docker stack `docker stack deploy --compose-file docker-compose.yml ecila` ecila is the name of the stack
 - Make sure all services are up `docker service ls`
-- visit the domain.com:WEB_PORT and test the bot
+- visit the web.domain.com and test the bot
 ## Note
-This is very experimental project and it ll get updates every now and then
+This is very experimental project and it ll get updates every now and then.
+I am using traefik to handle the routing between the microservices, as first usage I am using subdomains to serve frontends and thus, you ll need a FQDN which is wildcarded to the server ip so traefik will be able to read the subdomains. You can also use one subdomain and route throught pots but you will need to reconfigure traefik on your own.
 The desired architecture is detailed in the following graph, open the readme is raw mode for a clear view
+
+## Architecture
+Precaution: will be outdated at some moments, not going to update this always, refer to the source code and the information already cited in the read me file.
 ```
 
                                                      +--------------------------------+
