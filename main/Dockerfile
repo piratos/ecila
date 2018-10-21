@@ -23,8 +23,6 @@ RUN apt-get update -qq \
 
 COPY . /app
 
-EXPOSE 5000
-
 ENTRYPOINT ["python"]
 
 CMD ["chatapp.py"]

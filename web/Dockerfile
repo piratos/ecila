@@ -10,8 +10,6 @@ RUN pip install -r requirements-web.txt
 
 COPY . /app
 
-EXPOSE 5007
-
 ENTRYPOINT ["python"]
 
 CMD ["server.py"]

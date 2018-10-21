@@ -10,8 +10,6 @@ RUN pip install -r requirements-weather.txt
 
 COPY . /app
 
-EXPOSE 5001
-
 ENTRYPOINT ["python"]
 
 CMD ["weather_app.py"]
