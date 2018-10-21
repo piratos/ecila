@@ -19,16 +19,12 @@ $(function() {
             var message_val = message_elem.val();
 
             if (message_val) {
-                // send message
-                //$.get('http://192.168.187.128:5000/a/'+message_val).done(function(data){
-                //    showmsg(data);
-                //});
                 $.ajax({
                        type: 'GET',
                        crossDomain: true,
                        dataType: 'jsonp',
                        jsonp: false,
-                       url: 'http://'+appConfig.host_ip+':'+appConfig.main_port+'/a/'+message_val,
+                       url: 'https://'+appConfig.main_ep+':'+'/a/'+message_val,
                        success: function(data){
                             showmsg(data['msg']);
                        }

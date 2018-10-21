@@ -8,8 +8,10 @@ import os
 
 
 app = Flask(__name__)
-WEATHER_PORT = int(os.environ.get('WEATHER_PORT', '5000'))
-MAIN_PORT = int(os.environ.get('MAIN_PORT', 5000))
+WEATHER_PORT = int(os.environ.get('WEATHER_PORT', '80'))
+WEATHER_EP = os.environ.get('WEATHER_EP', 'NULL')
+MAIN_PORT = int(os.environ.get('MAIN_PORT', 80))
+MAIN_EP = os.environ.get('MAIN_PORT', 'NULL')
 
 
 def support_jsonp(f):
@@ -43,7 +45,7 @@ def respond(query):
 				weather_location = entity.get('value')
 		# get the response
 		if weather_location:
-			res = requests.get('http://weather:%d/loc/%s' % (WEATHER_PORT, weather_location)).text
+			res = requests.get('http://%s:%d/loc/%s' % (WEATHER_EP, WEATHER_PORT, weather_location)).text
 			full_answer = 'it will be %s in %s %s' %(res, weather_location, weather_date)
 			msg = full_answer
 	elif intent == 'greet':
