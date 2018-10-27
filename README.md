@@ -12,6 +12,7 @@ Steps to generate the data:
 
 Steps to run the application
 - Using the data.env environment file tweak the variables to your needs (modify the ports in the docker compose file as well)
+- The web and the traefik dashboard are protected with a basic digest authentication, you ll need to place your auth file in traefik/.htpassword with credentials in digest mode
 - Install docker-ce if it is not installed yet
 - Initialize the docker swarm `docker swarm init`
 - Start the docker stack `docker stack deploy --compose-file docker-compose.yml ecila` ecila is the name of the stack
@@ -21,7 +22,7 @@ Steps to run the application
 This is an 8 hours project dont expect the finest project it is a POC, will rewrite and refactor it every once and while
 ## Note
 This is very experimental project and it ll get updates every now and then.
-I am using traefik to handle the routing between the microservices, as first usage I am using subdomains to serve frontends and thus, you ll need a FQDN which is wildcarded to the server ip so traefik will be able to read the subdomains. You can also use one subdomain and route throught pots but you will need to reconfigure traefik on your own.
+I am using traefik to handle the routing between the microservices, as first usage I am using subdomains to serve frontends and thus, you ll need a FQDN which is wildcarded to the server ip so traefik will be able to read the subdomains. You can also use one subdomain and route throught ports but you will need to reconfigure traefik on your own.
 The desired architecture is detailed in the following graph, open the readme is raw mode for a clear view
 
 ## Architecture
