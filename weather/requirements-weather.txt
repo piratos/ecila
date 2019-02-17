@@ -1,2 +1,2 @@
-weather-api
 flask
+openweathermapy
